@@ -9,24 +9,56 @@ public class Faction : MonoBehaviour
     public List<GameObject> population;
     public float baseHappiness = 4;
     public float happiness;
+    public float foodChange;
+    public float foodMax = 500;
+    public float food;
     public float timeBetweenCitizens;
     public float timeToNextCitizen;
     public float timeToNextCitizenMax;
+    public float timeToNextCitizenLimit = 100;
+    public float tickMax = 1;
+    public float tick;
+
+    private void Start()
+    {
+        tick = tickMax;
+    }
 
     private void Update()
     {
-        CalculateHappiness();
-        CalculateTimeBetweenCitizens();
-
-        if (timeToNextCitizen <= 0)
+        tick -= Time.deltaTime;
+        if (tick <= 0)
         {
-            SpawnCitizen();
+            tick = tickMax;
             CalculateHappiness();
             CalculateTimeBetweenCitizens();
-            timeToNextCitizenMax = timeBetweenCitizens;
-            timeToNextCitizen = timeToNextCitizenMax;
+            CalculateFood();
+
+            timeToNextCitizen -= 1;
+            if (timeToNextCitizen <= 0)
+            {
+                SpawnCitizen();
+                CalculateHappiness();
+                CalculateTimeBetweenCitizens();
+                timeToNextCitizenMax = timeBetweenCitizens;
+                timeToNextCitizen = timeToNextCitizenMax;
+            }
         }
-        timeToNextCitizen -= Time.deltaTime;
+
+    }
+
+    private void CalculateFood()
+    {
+        food += foodChange;
+        if (food > foodMax)
+            food = foodMax;
+        foodChange = 0;
+        foreach (GameObject pop in population)
+        {
+            Citizen citizen = pop.GetComponent<Citizen>();
+            foodChange += citizen.foodGathered;
+            foodChange -= citizen.foodConsumed;
+        }
     }
 
     private void CalculateHappiness()
@@ -36,7 +68,13 @@ public class Faction : MonoBehaviour
 
     private void CalculateTimeBetweenCitizens()
     {
-        timeBetweenCitizens = 100 / happiness;
+        timeBetweenCitizens = timeToNextCitizenLimit / happiness;
+        if (timeToNextCitizenMax > timeBetweenCitizens)
+        {
+            timeToNextCitizenMax = timeBetweenCitizens;
+            if (timeToNextCitizen > timeToNextCitizenMax)
+                timeToNextCitizen = timeToNextCitizenMax + 1;
+        }
     }
 
     private void SpawnCitizen()
