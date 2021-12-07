@@ -6,26 +6,31 @@ using UnityEngine;
 public class Citizen : MonoBehaviour
 {
     public Faction faction;
-    public enum State { Idle, Moving, Fighting };
+    public enum State { Gathering, Building, Moving, Fighting };
     public State currentState;
     public float foodConsumed = 1;
     public float foodGathered = 0;
-    public float IdleFoodGather = 2;
+    public float gatherAmount = 2;
 
     private void Start()
     {
-        currentState = State.Idle;
+        currentState = State.Gathering;
     }
 
     private void Update()
     {
-        if (currentState == State.Idle)
+        if (currentState == State.Gathering)
         {
-            if (foodGathered != IdleFoodGather)
-                foodGathered = IdleFoodGather;
+            if (foodGathered != gatherAmount)
+                foodGathered = gatherAmount;
         }
         else
             foodGathered = 0;
+    }
+
+    private void OnMouseDown()
+    {
+        CameraController.instance.followTransform = transform;
     }
 
     private void OnDestroy()

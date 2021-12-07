@@ -44,7 +44,6 @@ public class Faction : MonoBehaviour
                 timeToNextCitizen = timeToNextCitizenMax;
             }
         }
-
     }
 
     private void CalculateFood()
@@ -82,5 +81,10 @@ public class Faction : MonoBehaviour
         GameObject newCitizen = Instantiate(citizen);
         population.Add(newCitizen);
         newCitizen.GetComponent<Citizen>().faction = this;
+    }
+
+    private void OnMouseDown()
+    {
+        CameraController.instance.followTransform = transform;
     }
 }
