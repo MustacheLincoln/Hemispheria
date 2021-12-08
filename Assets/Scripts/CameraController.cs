@@ -40,28 +40,10 @@ public class CameraController : MonoBehaviour
         if (followTransform)
             newPosition = followTransform.position;
 
-        HandleMouseInput();
-        HandleKeyboardInput();
+        HandleCameraInput();
     }
 
-    private void HandleMouseInput()
-    {
-        if (Input.mouseScrollDelta.y != 0)
-            newZoom += Input.mouseScrollDelta.y * zoomSpeed * Time.deltaTime * 5;
-        if (Input.GetMouseButtonDown(2))
-            rotationStartPosition = Input.mousePosition;
-        if (Input.GetMouseButton(2))
-        {
-            rotationCurrentPosition = Input.mousePosition;
-            Vector3 difference = rotationStartPosition - rotationCurrentPosition;
-            rotationStartPosition = rotationCurrentPosition;
-            newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5));
-        }
-
-
-    }
-
-    void HandleKeyboardInput()
+    void HandleCameraInput()
     {
         if (Input.GetKey(KeyCode.LeftShift))
             movementSpeed = fastSpeed;
@@ -93,11 +75,24 @@ public class CameraController : MonoBehaviour
             newRotation *= Quaternion.Euler(Vector3.up * rotationSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.E))
             newRotation *= Quaternion.Euler(Vector3.up * -rotationSpeed * Time.deltaTime);
+        if (Input.GetMouseButtonDown(2))
+            rotationStartPosition = Input.mousePosition;
+        if (Input.GetMouseButton(2))
+        {
+            rotationCurrentPosition = Input.mousePosition;
+            Vector3 difference = rotationStartPosition - rotationCurrentPosition;
+            rotationStartPosition = rotationCurrentPosition;
+            newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5));
+        }
 
         if (Input.GetKey(KeyCode.R))
             newZoom += zoomSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.F))
             newZoom -= zoomSpeed * Time.deltaTime;
+        if (Input.mouseScrollDelta.y != 0)
+            newZoom += Input.mouseScrollDelta.y * zoomSpeed * Time.deltaTime * 5;
+        newZoom.y = Mathf.Clamp(newZoom.y, 50, 500);
+        newZoom.z = Mathf.Clamp(newZoom.z, -500, -50);
 
         transform.position = Vector3.Lerp(transform.position, newPosition, movementTime * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, movementTime * Time.deltaTime);
