@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectionHandler : MonoBehaviour
 {
-    SelectedDictionary selectedDictionary;
+    SelectedList selectedList;
     RaycastHit hit;
 
     bool dragSelect;
@@ -22,7 +22,7 @@ public class SelectionHandler : MonoBehaviour
 
     private void Start()
     {
-        selectedDictionary = GetComponent<SelectedDictionary>();
+        selectedList = GetComponent<SelectedList>();
         dragSelect = false;
     }
 
@@ -49,14 +49,14 @@ public class SelectionHandler : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        if (hit.transform.gameObject.tag == "Unit")
-                            selectedDictionary.AddSelected(hit.transform.gameObject);
+                        if (hit.transform.gameObject.tag == "Unit" || hit.transform.gameObject.tag == "Building")
+                            selectedList.AddSelected(hit.transform.gameObject);
                     }
                     else
                     {
-                        selectedDictionary.DeselectAll();
-                        if (hit.transform.gameObject.tag == "Unit")
-                            selectedDictionary.AddSelected(hit.transform.gameObject);
+                        selectedList.DeselectAll();
+                        if (hit.transform.gameObject.tag == "Unit" || hit.transform.gameObject.tag == "Building")
+                            selectedList.AddSelected(hit.transform.gameObject);
                     }
 
                 }
@@ -68,7 +68,7 @@ public class SelectionHandler : MonoBehaviour
                     }
                     else
                     {
-                        selectedDictionary.DeselectAll();
+                        selectedList.DeselectAll();
                     }
                 }
             }
@@ -101,7 +101,7 @@ public class SelectionHandler : MonoBehaviour
 
                 if (!Input.GetKey(KeyCode.LeftShift))
                 {
-                    selectedDictionary.DeselectAll();
+                    selectedList.DeselectAll();
                 }
 
                 Destroy(selectionBox, 0.02f);
@@ -192,6 +192,6 @@ public class SelectionHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Unit")
-            selectedDictionary.AddSelected(other.gameObject);
+            selectedList.AddSelected(other.gameObject);
     }
 }

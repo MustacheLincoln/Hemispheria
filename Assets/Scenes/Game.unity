@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 5ed6206ba6efb9a4a84d470144e11ca9, type: 2}
 --- !u!1 &58297967
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,12 +438,60 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5631749806499916019, guid: 0e448d31c0594e44b9628cd6806ac3be, type: 3}
   m_PrefabInstance: {fileID: 5631749807124049805}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 688751676}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f34b6839bd853841bd97652483e3b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &668990959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668990961}
+  - component: {fileID: 668990960}
+  m_Layer: 0
+  m_Name: '[MouseRaycast]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &668990960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668990959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9463ef9a00f012b49a46739e2cb9957f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkablePosition: {x: 0, y: 0, z: 0}
+  mainCamera: {fileID: 477314603}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!4 &668990961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668990959}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &686091273
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +626,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686091273}
   m_CullTransparentMesh: 1
+--- !u!1 &688751676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5631749806499916020, guid: 0e448d31c0594e44b9628cd6806ac3be, type: 3}
+  m_PrefabInstance: {fileID: 5631749807124049805}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &688751682
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688751676}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &735648322
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +711,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &785497738
 BoxCollider:
@@ -1126,6 +1195,14 @@ PrefabInstance:
     - target: {fileID: 5631749806499916020, guid: 0e448d31c0594e44b9628cd6806ac3be, type: 3}
       propertyPath: m_Name
       value: Capital(Faction)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631749806499916020, guid: 0e448d31c0594e44b9628cd6806ac3be, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631749806499916020, guid: 0e448d31c0594e44b9628cd6806ac3be, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e448d31c0594e44b9628cd6806ac3be, type: 3}
