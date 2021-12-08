@@ -82,9 +82,4 @@ public class Faction : MonoBehaviour
         population.Add(newCitizen);
         newCitizen.GetComponent<Citizen>().faction = this;
     }
-
-    private void OnMouseDown()
-    {
-        CameraController.instance.followTransform = transform;
-    }
 }

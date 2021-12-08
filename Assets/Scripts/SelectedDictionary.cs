@@ -13,21 +13,22 @@ public class SelectedDictionary : MonoBehaviour
         if (!selectedDict.ContainsKey(id))
         {
             selectedDict.Add(id, go);
-            go.AddComponent<SelectionComponent>();
+            go.GetComponent<Renderer>().material.color = Color.yellow;
+            CameraController.instance.followTransform = go.transform;
         }
     }
 
     public void Deselect(int id)
     {
-        Destroy(selectedDict[id].GetComponent<SelectionComponent>());
         selectedDict.Remove(id);
+        selectedDict[id].GetComponent<Renderer>().material.color = Color.white;
     }
 
     public void DeselectAll()
     {
         foreach (KeyValuePair<int, GameObject> pair in selectedDict)
             if (pair.Value)
-                Destroy(selectedDict[pair.Key].GetComponent<SelectionComponent>());
+                selectedDict[pair.Key].GetComponent<Renderer>().material.color = Color.white;
         selectedDict.Clear();
     }
 }

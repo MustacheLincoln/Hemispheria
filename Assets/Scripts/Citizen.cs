@@ -27,12 +27,6 @@ public class Citizen : MonoBehaviour
         else
             foodGathered = 0;
     }
-
-    private void OnMouseDown()
-    {
-        CameraController.instance.followTransform = transform;
-    }
-
     private void OnDestroy()
     {
         faction.population.Remove(gameObject);

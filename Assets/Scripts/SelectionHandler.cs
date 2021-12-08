@@ -49,12 +49,14 @@ public class SelectionHandler : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        selectedDictionary.AddSelected(hit.transform.gameObject);
+                        if (hit.transform.gameObject.tag == "Unit")
+                            selectedDictionary.AddSelected(hit.transform.gameObject);
                     }
                     else
                     {
                         selectedDictionary.DeselectAll();
-                        selectedDictionary.AddSelected(hit.transform.gameObject);
+                        if (hit.transform.gameObject.tag == "Unit")
+                            selectedDictionary.AddSelected(hit.transform.gameObject);
                     }
 
                 }
@@ -189,6 +191,7 @@ public class SelectionHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        selectedDictionary.AddSelected(other.gameObject);
+        if (other.gameObject.tag == "Unit")
+            selectedDictionary.AddSelected(other.gameObject);
     }
 }
